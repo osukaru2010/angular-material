@@ -1,0 +1,47 @@
+table {
+    width: 100%;
+  }
+
+  .demo-table {
+    width: 100%;
+  }
+  
+  .demo-button-container {
+    padding-bottom: 16px;
+  }
+  
+  .demo-button + .demo-button {
+    margin-left: 8px;
+  }
+
+  .btnEdit, .btnDelete{
+    cursor: pointer;
+  }
+
+  .btnDelete{
+    color:brown;
+  }
+
+  .mat-form-field{
+    width: 90%;
+    margin-right: 15px;
+  }
+
+  @media (max-width: 600px) {
+    .mat-label {
+      font-size: 7px;
+    }
+
+    .mat-stroked-button{
+      font-size: 8px;
+    }
+
+    .mat-cell{
+      font-size: 10px;
+    }
+
+      .mat-form-field{
+      width: 90%;
+      margin-right: 15px;
+    }
+  }

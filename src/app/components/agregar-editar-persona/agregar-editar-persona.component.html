@@ -1,0 +1,95 @@
+<div class="container">
+  <h2 mat-dialog-title>{{operacion}} Persona</h2>
+  <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+
+
+<form [formGroup]="form"  (ngSubmit)="addEditPersona()">
+  <mat-dialog-content>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input formControlName="nombre" matInput placeholder="Ingrese Nombre" autocomplete="off" >
+          </mat-form-field>
+          <div  class="error">
+            <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">El Nombre es un Campo <strong>Requerido</strong> </span>
+            <span *ngIf="form.get('nombre')?.hasError('maxlength')">El Nombre no puede superar <strong>20 Caracteres</strong> </span>
+          </div>
+          
+      </div>
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido</mat-label>
+          <input formControlName="apellido" matInput placeholder="Ingrese Apellido" autocomplete="off">
+          </mat-form-field>
+        <div  class="error">
+          <span *ngIf="form.get('apellido')?.hasError('required') && form.get('apellido')?.touched" >El Apellido es un Campo <strong>Requerido</strong> </span>
+        </div>
+      </div>
+  
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Correo</mat-label>
+          <input formControlName="correo" matInput placeholder="Ingrese Correo" autocomplete="off">
+          </mat-form-field>
+          <div  class="error">
+            <span *ngIf="form.get('correo')?.hasError('required') && form.get('correo')?.touched">El Correo es un Campo <strong>Requerido</strong> </span>
+            <span *ngIf="form.get('correo')?.hasError('email') && form.get('correo')?.touched">El correo debe ser correo@dominio.com </span>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo Documento</mat-label>
+          <mat-select formControlName="tipoDocumento">
+            <mat-option *ngFor="let documento of documentos" [value]="documento">
+              {{documento}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div  class="error">
+          <span *ngIf="form.get('tipoDocumento')?.hasError('required') && form.get('tipoDocumento')?.touched">El Tipo Documento es un Campo <strong>Requerido</strong> </span>
+        </div>
+  
+      </div>
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Documento</mat-label>
+          <input type=number formControlName="documento" matInput placeholder="Ingrese Documento" autocomplete="off">
+          </mat-form-field>
+          <div  class="error">
+            <span *ngIf="form.get('documento')?.hasError('required') && form.get('documento')?.touched">El Documento es un Campo <strong>Requerido</strong> </span>
+            
+          </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="column">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input [max]="maxDate" formControlName="fechaNacimiento" matInput [matDatepicker]="picker">
+          <mat-hint>YYYY-MM-DD</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+        <div  class="error">
+          <span *ngIf="form.get('fechaNacimiento')?.hasError('required') && form.get('fechaNacimiento')?.touched">El Fecha Nacimiento es un Campo <strong>Requerido</strong> </span>
+          
+        </div>
+      </div>
+    </div>
+  
+  
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button (click)="cancelar()">Cancelar</button>
+    <button [disabled]="form.invalid" type="submit" (click)="addEditPersona()"  mat-button cdkFocusInitial>Aceptar</button> 
+  </mat-dialog-actions>
+</form>
